@@ -1,0 +1,8 @@
+export const GET_STUDENTS = 'GET_ALL';
+export const GET_LESSONS = 'GET_LESSON';
+
+export const RESET_ABSCENCE = 'RESET_ABSCENCE';
+export const INCREMENT_ABSCENCE = 'INCREMENT_ABSCENCE';
+export const DECREMENT_ABSCENCE = 'DECREMENT_ABSCENCE';
+
+export const ORDER_NOTE = 'ORDER_NOTE';
