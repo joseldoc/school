@@ -20,9 +20,9 @@ export const getLessons = () => {
     }
 }
 
-export const orderNote = payload => {
+export const orderNote = () => {
     return {
-        type: ORDER_NOTE, action: payload
+        type: ORDER_NOTE
     }
 }
 

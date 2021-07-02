@@ -18,7 +18,7 @@ const StudentScreen = ({navigation}) => {
                 <Button  mode="contained" onPress={() =>dispatch(resetAbscence())}>
                     reset abscence
                 </Button>
-                <Button onClick style={{marginTop: 5}} mode="contained" onPress={() => orderNote()}>
+                <Button onClick style={{marginTop: 5}} mode="contained" onPress={() => dispatch(orderNote())}>
                     Order note
                 </Button>
             </View>

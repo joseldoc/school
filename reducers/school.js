@@ -4,8 +4,9 @@ import {
     RESET_ABSCENCE,
     INCREMENT_ABSCENCE,
     DECREMENT_ABSCENCE,
-    GET_STUDENT
+    GET_STUDENT, ORDER_NOTE
 } from '../constants/actions';
+import {average} from "../actions/actions-types";
 
 const stateInit = {
     students: [
@@ -37,15 +38,15 @@ const school = (state = stateInit, action) => {
         }
 
         case INCREMENT_ABSCENCE : {
-            let students = [...state.students];
+            let {students, student} = {...state};
 
-            students = students.map(student => {
-                if(student.id === action.payload) {
-                    student.attendance++;
+            students = students.map(data => {
+                if(data.id === action.payload) {
+                    data.attendance++;
+                    student = data;
                 }
-
                 return {
-                    ...student,
+                    ...data,
                     lessons: [...student.lessons],
                     notes: [...student.notes]
                 }
@@ -53,17 +54,21 @@ const school = (state = stateInit, action) => {
 
             return {
                 ...state,
-                students
+                students,
+                student
             }
         }
 
         case DECREMENT_ABSCENCE : {
-            let students = [...state.students]
+            let {students, student} = {...state};
 
-            students = students.map(student => {
-                if(student.id === action.payload && student.attendance !== 0) student.attendance--;
+            students = students.map(data => {
+                if(data.id === action.payload && data.attendance !== 0) {
+                    data.attendance--;
+                    student = data;
+                }
                 return {
-                    ...student,
+                    ...data,
                     lessons: [...student.lessons],
                     notes: [...student.notes]
                 }
@@ -71,17 +76,39 @@ const school = (state = stateInit, action) => {
 
             return {
                 ...state,
-                students
+                students,
+                student
             }
         }
 
         case GET_STUDENT : {
-            let students = [...state.students];
-            const student = students.find((elt) => elt.id === action.payload);
+            let {student, students} = {...state};
+            student = students.find((elt) => elt.id === action.payload);
+            return {
+                ...state,
+               student
+            }
+        }
+
+        case ORDER_NOTE : {
+            let {order, students} = {...state};
+
+            if(!order) {
+                students = students.sort((a, b) => {
+                    return average(a.notes) - average(b.notes);
+                });
+
+            } else {
+                students = students.sort((a, b) => {
+                    return average(b.notes) - average(a.notes);
+                });
+            }
+            order = !order;
 
             return {
                 ...state,
-                student
+                order,
+                students
             }
         }
         default:
