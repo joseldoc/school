@@ -4,7 +4,7 @@ import {
     RESET_ABSCENCE,
     INCREMENT_ABSCENCE,
     DECREMENT_ABSCENCE,
-    GET_STUDENT, ORDER_NOTE
+    GET_STUDENT, ORDER_NOTE,
 } from '../constants/actions';
 import {average} from "../actions/actions-types";
 
@@ -108,6 +108,22 @@ const school = (state = stateInit, action) => {
             return {
                 ...state,
                 order,
+                students
+            }
+        }
+        case RESET_ABSCENCE : {
+            let {students} = {...state};
+            students = students.map((student) => {
+                student.attendance = 0;
+                return {
+                    ...student,
+                    lessons: [...student.lessons],
+                    notes: [...student.notes]
+                }
+            });
+
+            return {
+                ...state,
                 students
             }
         }

@@ -36,9 +36,9 @@ export const decrementAbscence = payload => {
         type: DECREMENT_ABSCENCE, payload
     }
 }
-export const resetAbscence = payload => {
+export const resetAbscence = () => {
     return {
-        type: RESET_ABSCENCE, payload
+        type: RESET_ABSCENCE
     }
 }
 
