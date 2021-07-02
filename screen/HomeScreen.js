@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import { Button, Text } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 
 const HomeScreen = ({navigation}) => {
     return (
