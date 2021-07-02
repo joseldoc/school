@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {View} from "react-native";
-import {Button, Text, Title} from "react-native-paper";
+import {Button, Title} from "react-native-paper";
 import {useDispatch, useSelector} from "react-redux";
 import {decrementAbscence, incrementAbscence, getStudent} from "../actions/actions-types";
 
-const AbscenseScreen = ({route}) => {
+const AbscenseScreen = ({route, navigation}) => {
     const {id} = route.params;
     const dispatch = useDispatch();
 
@@ -14,9 +14,12 @@ const AbscenseScreen = ({route}) => {
 
     const { student } = useSelector((state) => state.school);
     return (
-       student && <View style={{margin:12, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Title>Abscence de : {student.name}</Title>
-            <Title>Nombre d'abscence : {student.attendance}</Title>
+        <View style={{margin:12, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Button style={{marginBottom: 10}} mode="contained" onPress={() => navigation.navigate('Home')}>
+                Home
+            </Button>
+            <Title>Abscence de : {student && student.name}</Title>
+            <Title>Nombre d'abscence : {student && student.attendance}</Title>
             <View style={{ display: 'flex', justifyContent: 'center'}}>
             <Button
                 icon="plus"
@@ -25,12 +28,13 @@ const AbscenseScreen = ({route}) => {
                 onPress={() => dispatch(incrementAbscence(id))} >
                 Incrémenter
             </Button>
-            <Button
-                icon="minus"
-                compact={true}
-                style={{marginTop: 5}} mode="contained" onPress={() => dispatch(decrementAbscence(id))} >
-            Décrémenter
-            </Button>
+                {student.attendance !== 0 && (<Button
+                    icon="minus"
+                    compact={true}
+                    style={{marginTop: 5}} mode="contained" onPress={() => dispatch(decrementAbscence(id))} >
+                Décrémenter
+                </Button>)
+                }
             </View>
         </View>
     );

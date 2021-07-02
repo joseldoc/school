@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, SafeAreaView, FlatList, ScrollView} from 'react-native';
-import {Button, Text} from "react-native-paper";
+import {Button} from "react-native-paper";
 import {useDispatch, useSelector} from "react-redux";
 import { average, totalCourse, resetAbscence, orderNote } from '../actions/actions-types';
 import {Styles} from '../Styles';
@@ -15,7 +15,10 @@ const StudentScreen = ({navigation}) => {
         <SafeAreaView style={{flex:1}}>
 
             <View style={{margin: 12}}>
-                <Button  mode="contained" onPress={() =>dispatch(resetAbscence())}>
+                <Button  mode="contained" onPress={() => navigation.navigate('Home')}>
+                    Home
+                </Button>
+                <Button style={{marginTop: 5}} mode="contained" onPress={() =>dispatch(resetAbscence())}>
                     reset abscence
                 </Button>
                 <Button onClick style={{marginTop: 5}} mode="contained" onPress={() => dispatch(orderNote())}>

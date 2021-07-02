@@ -117,9 +117,6 @@ const school = (state = stateInit, action) => {
                 student.attendance = 0;
                 return {
                     ...student,
-                    id: student.id,
-                    name : student.name,
-                    attendance: student.attendance,
                     lessons: [...student.lessons],
                     notes: [...student.notes]
                 }
