@@ -47,8 +47,8 @@ const school = (state = stateInit, action) => {
                 }
                 return {
                     ...data,
-                    lessons: [...student.lessons],
-                    notes: [...student.notes]
+                    lessons: [...data.lessons],
+                    notes: [...data.notes]
                 }
             });
 
@@ -69,8 +69,8 @@ const school = (state = stateInit, action) => {
                 }
                 return {
                     ...data,
-                    lessons: [...student.lessons],
-                    notes: [...student.notes]
+                    lessons: [...data.lessons],
+                    notes: [...data.notes]
                 }
             });
 
@@ -104,12 +104,12 @@ const school = (state = stateInit, action) => {
                 });
             }
             order = !order;
-
             return {
                 ...state,
-                order,
-                students
+                students,
+                order
             }
+
         }
         case RESET_ABSCENCE : {
             let {students} = {...state};
@@ -117,6 +117,9 @@ const school = (state = stateInit, action) => {
                 student.attendance = 0;
                 return {
                     ...student,
+                    id: student.id,
+                    name : student.name,
+                    attendance: student.attendance,
                     lessons: [...student.lessons],
                     notes: [...student.notes]
                 }
