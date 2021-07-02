@@ -1,5 +1,6 @@
 export const GET_STUDENTS = 'GET_ALL';
 export const GET_LESSONS = 'GET_LESSON';
+export const GET_STUDENT = 'GET_STUDENT';
 
 export const RESET_ABSCENCE = 'RESET_ABSCENCE';
 export const INCREMENT_ABSCENCE = 'INCREMENT_ABSCENCE';

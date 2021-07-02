@@ -4,7 +4,8 @@ import {
     INCREMENT_ABSCENCE,
     GET_LESSONS,
     RESET_ABSCENCE,
-    DECREMENT_ABSCENCE
+    DECREMENT_ABSCENCE,
+    GET_STUDENT
 } from '../constants/actions';
 
 export const getStudents = () => {
@@ -38,6 +39,12 @@ export const decrementAbscence = payload => {
 export const resetAbscence = payload => {
     return {
         type: RESET_ABSCENCE, payload
+    }
+}
+
+export const getStudent = payload => {
+    return {
+        type: GET_STUDENT, payload
     }
 }
 

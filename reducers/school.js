@@ -3,7 +3,8 @@ import {
     GET_LESSONS,
     RESET_ABSCENCE,
     INCREMENT_ABSCENCE,
-    DECREMENT_ABSCENCE
+    DECREMENT_ABSCENCE,
+    GET_STUDENT
 } from '../constants/actions';
 
 const stateInit = {
@@ -20,7 +21,8 @@ const stateInit = {
         { id: 3, title: "MongoDB" },
     ],
     behaviours :  [],
-    order: false
+    order: false,
+    student : {}
 }
 
 const school = (state = stateInit, action) => {
@@ -34,6 +36,54 @@ const school = (state = stateInit, action) => {
             return {...state.lessons}
         }
 
+        case INCREMENT_ABSCENCE : {
+            let students = [...state.students];
+
+            students = students.map(student => {
+                if(student.id === action.payload) {
+                    student.attendance++;
+                }
+
+                return {
+                    ...student,
+                    lessons: [...student.lessons],
+                    notes: [...student.notes]
+                }
+            });
+
+            return {
+                ...state,
+                students
+            }
+        }
+
+        case DECREMENT_ABSCENCE : {
+            let students = [...state.students]
+
+            students = students.map(student => {
+                if(student.id === action.payload && student.attendance !== 0) student.attendance--;
+                return {
+                    ...student,
+                    lessons: [...student.lessons],
+                    notes: [...student.notes]
+                }
+            });
+
+            return {
+                ...state,
+                students
+            }
+        }
+
+        case GET_STUDENT : {
+            let students = [...state.students];
+            const student = students.find((elt) => elt.id === action.payload);
+
+            return {
+                ...state,
+                student
+            }
+        }
         default:
             return state;
     }
